@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
+/*   Updated: 2024/11/29 17:06:08 by zabu-bak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+#include "./libft/libft.h"
+#include "./printf/ft_printf.h"
+#include <mlx.h>
+#include "./X11/X.h"
+#include "./X11/keysym.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include "gnl/get_next_line.h"
+
+typedef enum e_assets
+{
+	WALL = '1',
+	FLOOR = '0',
+	COINS = 'C',
+	PLAYER = 'P'
+
+} t_e_assets;
+
+typedef struct s_img
+{
+	void *xpm_ptr;
+} t_img;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*window;
+} t_data;
+
+typedef struct s_render
+{
+	int		img_width;
+	int		img_height;
+	int x;
+	int y;
+} t_render;
+
+typedef struct s_mapdata
+{
+	char **row;
+	int	height;
+	int	width;
+} t_mapdata;
+
+typedef struct s_game
+{
+	t_data		data;
+	t_render	render;
+	t_mapdata	mapdata;
+	t_img	img;
+	t_img	wall;
+	t_img	player;
+	t_img	floor;
+	t_img	coins;
+
+} t_game;
+
+int	key_handlers(int keycode, t_game *game);
+int ft_close(t_game *game);
+void ft_rendermap(t_game *game);
+void render_object(t_game *game, t_img img, int i, int j);
+void	ft_identify_object(t_game *game, int i, int j);
+void	ft_map(t_game *game, char **av);
+void render_player(t_game *game, t_img img, int i, int j);
+
+#endif
