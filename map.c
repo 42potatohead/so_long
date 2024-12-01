@@ -30,12 +30,18 @@ void render_object(t_game *game, t_img img, int i, int j)
 
 void	ft_identify_object(t_game *game, int i, int j)
 {
+	void *spritesheet = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/chicken-32x32.xpm",
+        &game->render.img_width, &game->render.img_height);
+
 	if (game->mapdata.row[j][i] == WALL)
 		render_object(game, game->wall, i, j);
 	if (game->mapdata.row[j][i] == FLOOR || game->mapdata.row[j][i] == PLAYER)
 		render_object(game, game->floor, i, j);
 	if (game->mapdata.row[j][i] == PLAYER)
+	{
+		game->player.xpm_ptr = extract_sprite(game->data.mlx_ptr, spritesheet, 0, 0);
 		render_object(game, game->player, i, j);
+	}
 }
 
 int	ft_readmap(t_game *game, int fd)

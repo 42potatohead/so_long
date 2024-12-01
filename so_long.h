@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/11/29 17:06:08 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:38:35 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_game
 	t_img	player;
 	t_img	floor;
 	t_img	coins;
+	t_img	spritesheet;
 
 } t_game;
 
@@ -77,5 +78,6 @@ void render_object(t_game *game, t_img img, int i, int j);
 void	ft_identify_object(t_game *game, int i, int j);
 void	ft_map(t_game *game, char **av);
 void render_player(t_game *game, t_img img, int i, int j);
+void *extract_sprite(void *mlx_ptr, void *spritesheet, int x, int y);
 
 #endif
