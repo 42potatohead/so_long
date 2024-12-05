@@ -30,7 +30,7 @@ void ft_playermove(t_game *game, int i, int j)
 	game->render.player_j = j;
 	if (game->mapdata.row[game->render.player_j][game->render.player_i] == COINS)
 	{
-		game->mapdata.row[game->render.player_j][game->render.player_i] = WALL;
+		game->mapdata.row[game->render.player_j][game->render.player_i] = FLOOR;
 		game->data.coinscltd++;
 		ft_printf("Coins Collected : %d \n", game->data.coinscltd);
 	}
@@ -77,47 +77,56 @@ int	ft_readmap(t_game *game, int fd)
 }
 void ft_calch(t_game *game, int fd)
 {
-	int i;
-
-	i = 0;
 	char *line;
+	int i;
+	int ch;
+
+	game->mapdata.coins = 0;
+	game->mapdata.exits = 0;
+	i = 0;
+	ch = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
+		while (line[ch] != '\0')
+		{
+			if (line[ch] == COINS)
+				game->mapdata.coins++;
+			if (line[ch] == 'E')
+				game->mapdata.exits++;
+			ch++;
+		}
 		free(line);
 		i++;
 	}
+	if (game->mapdata.exits != 1)
+		ft_close(game);
 	game->mapdata.height = i;
 }
 
 void ft_checkmap(t_game *game)
 {
 	int i;
-	int j;
-	int k;
-	int h;
 
-	j = 0;
+	i = -1;
+	while(game->mapdata.row[0][++i + 1] != '\0')
+		if (game->mapdata.row[0] != NULL && game->mapdata.row[0][i] != WALL)
+			ft_close(game);
+	i = -1;
+	while(game->mapdata.row[game->mapdata.height - 1][++i + 1] != '\0')
+		if (game->mapdata.row[game->mapdata.height - 1] != NULL && game->mapdata.row[game->mapdata.height - 1][i] != WALL)
+			ft_close(game);
 	i = 0;
-	k = 0;
-	h = 0;
 	game->mapdata.width = 13;
 	while (game->mapdata.row[i])
 	{
-		if (game->mapdata.row[i + 1] != NULL && (strlen(game->mapdata.row[i]) != strlen(game->mapdata.row[i + 1])))
-			exit(-1);
+		if (game->mapdata.row[i + 1] != NULL && (ft_strlen(game->mapdata.row[i]) != ft_strlen(game->mapdata.row[i + 1])))
+			ft_close(game);
+		if (game->mapdata.row[i] != NULL && (game->mapdata.row[i][0] != WALL || game->mapdata.row[i][game->mapdata.width - 2] != WALL))
+			ft_close(game);
 		i++;
-		if (game->mapdata.row[0] != NULL && (game->mapdata.row[0][j] != WALL))
-			exit(-1);
-		j++;
-		if (game->mapdata.row[game->mapdata.height] != NULL && (game->mapdata.row[game->mapdata.height][h] != WALL))
-			exit(-1);
-		h++;
-		if (game->mapdata.row[j] != NULL && (game->mapdata.row[k][1] != WALL && game->mapdata.row[k][game->mapdata.width]))
-			exit(-1);
-		k++;
 	}
 }
 
