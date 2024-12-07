@@ -28,12 +28,15 @@ void ft_playermove(t_game *game, int i, int j)
 {
 	game->render.player_i = i;
 	game->render.player_j = j;
+	printf("%d %d \n", game->render.player_j, game->render.player_i);
 	if (game->mapdata.row[game->render.player_j][game->render.player_i] == COINS)
 	{
 		game->mapdata.row[game->render.player_j][game->render.player_i] = FLOOR;
 		game->data.coinscltd++;
 		ft_printf("Coins Collected : %d \n", game->data.coinscltd);
 	}
+	if (game->mapdata.row[game->render.player_j][game->render.player_i] == 'E' && game->data.coinscltd == game->mapdata.coins)
+		win_game(game);
 	ft_printf("# of Moves : %d\n", game->data.mvcount++);
 	mlx_put_image_to_window(game->data.mlx_ptr, game->data.window, game->player.xpm_ptr, (i *32), (j * 32));
 	if(game->render.dir == 'w')
@@ -81,15 +84,16 @@ void ft_calch(t_game *game, int fd)
 	int i;
 	int ch;
 
+	game->mapdata.mapalloc = 0;
 	game->mapdata.coins = 0;
 	game->mapdata.exits = 0;
 	i = 0;
-	ch = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
+		ch = 0;
 		while (line[ch] != '\0')
 		{
 			if (line[ch] == COINS)
@@ -130,6 +134,35 @@ void ft_checkmap(t_game *game)
 	}
 }
 
+void fill(t_game game, int j, int i, int *coll)
+{
+	printf("%d %d %d \n",i , j ,game.mapdata.height - 1);
+	if (j < 0 || i < 0 || j == game.mapdata.height - 1 || i == 12 || game.mapdata.row[j][i] == '1')
+		return ;
+	// if (game.mapdata.row[j][i] == WALL)
+	// 	return ;
+	if (game.mapdata.row[j][i] == COINS)
+		*(coll) += 1;
+
+	game.mapdata.row[j][i] = '1';
+
+	fill(game, j + 1 , i, coll);
+	fill(game, j - 1 , i, coll);
+	fill(game, j , i + 1, coll);
+	fill(game, j , i - 1, coll);
+}
+
+int	ft_checkpath(t_game game, int j, int i)
+{
+	int coll = 0;
+	printf("%d %d \n", j , i);
+	fill(game, j, i, &coll);
+	if(coll == game.mapdata.coins)
+		return (1);
+	printf("%d", coll);
+	return 0;
+}
+
 void	ft_map(t_game *game, char **av)
 {
 	int fd;
@@ -137,13 +170,17 @@ void	ft_map(t_game *game, char **av)
 	fd = open(av[1], O_RDONLY);
 	ft_calch(game, fd);
 	close(fd);
+	game->mapdata.mapalloc = 1;
     game->mapdata.row = malloc(sizeof(char *) * (game->mapdata.height + 1));
 	if (!game->mapdata.row)
 		return ;
 	fd = open(av[1], O_RDONLY);
 	if(!ft_readmap(game, fd))
 		{ft_printf("Error reading map."); exit(0);}
+	printf("%d %d \n", game->render.player_j, game->render.player_i);
 	ft_checkmap(game);
+	if(!ft_checkpath(*game, game->render.player_j, game->render.player_i))
+		ft_printf("Exit or collectibles are not within reach");
 	ft_rendermap(game);
 
 }

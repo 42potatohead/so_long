@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/05 19:00:14 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:56:23 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_mapdata
 	int			width;
 	int			coins;
 	int			exits;
+	int			mapalloc;
 }				t_mapdata;
 
 typedef struct s_game
@@ -86,5 +87,8 @@ void			ft_playermove(t_game *game, int i, int j);
 void			ft_movement(int keycode, t_game *game);
 void			ft_checkmap(t_game *game);
 void			ft_free_map(t_game *game);
+void win_game(t_game *game);
+void fill(t_game game, int j, int i, int *coll);
+int	ft_checkpath(t_game game, int j, int i);
 
 #endif

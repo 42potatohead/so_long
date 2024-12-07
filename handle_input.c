@@ -59,9 +59,16 @@ void ft_free_map(t_game *game)
 int ft_close(t_game *game)
 {
 	ft_free_img(game);
-	ft_free_map(game);
+	if (game->mapdata.mapalloc == 1)
+		ft_free_map(game);
 	mlx_destroy_window(game->data.mlx_ptr, game->data.window);
 	mlx_destroy_display(game->data.mlx_ptr);
 	free(game->data.mlx_ptr);
 	exit(0);
+}
+
+void win_game(t_game *game)
+{
+	ft_printf("Chicken escaped!! You won the game! \n");
+	ft_close(game);
 }

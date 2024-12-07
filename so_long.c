@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:12:49 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/05 18:22:08 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:39:45 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void ft_initimg(t_game *game)
 		&game->render.img_height, &game->render.img_width);
 	game->floor.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/Grass.xpm",
 		&game->render.img_height, &game->render.img_width);
-	game->player.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/ducky.xpm",
+	game->player.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/chickenbg.xpm",
 		&game->render.img_height, &game->render.img_width);
 	game->coins.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/111.xpm",
 		&game->render.img_height, &game->render.img_width);
