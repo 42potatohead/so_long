@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:12:49 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/07 16:39:45 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:55:50 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void ft_initimg(t_game *game)
 		&game->render.img_height, &game->render.img_width);
 	game->coins.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/111.xpm",
 		&game->render.img_height, &game->render.img_width);
+		game->exit.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr, "./imgs/exit.xpm",
+		&game->render.img_height, &game->render.img_width);
 }
 
 int ft_initgame(t_game *game, char **av)
@@ -56,7 +58,7 @@ int ft_initgame(t_game *game, char **av)
 	game->data.mlx_ptr = mlx_init();
 	if (!game->data.mlx_ptr)
 		return (1);
-	game->data.window = mlx_new_window(game->data.mlx_ptr, 400, 400, "WOW");
+	game->data.window = mlx_new_window(game->data.mlx_ptr, 34 * 32, 6 * 32, "WOW");
 	if(!game->data.window)
 		return (free(game->data.mlx_ptr), 1);
 	game->data.coinscltd = 0;
@@ -73,6 +75,7 @@ int	main(int ac, char **av)
 	ft_initgame(&game, av);
 	mlx_hook(game.data.window, 17, 0, ft_close, &game);
 	mlx_hook(game.data.window, KeyPress, KeyRelease, key_handlers, &game);
+	mlx_loop_hook(game.data.mlx_ptr, display_exit, &game);
 	mlx_loop(game.data.mlx_ptr);
 	return (0);
 }

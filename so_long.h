@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/07 19:56:23 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:31:35 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ typedef struct s_render
 typedef struct s_mapdata
 {
 	char		**row;
+	char		**tmp_map;
 	int			height;
 	int			width;
 	int			coins;
 	int			exits;
 	int			mapalloc;
+	int			exit_j;
+	int			exit_i;
 }				t_mapdata;
 
 typedef struct s_game
@@ -74,10 +77,11 @@ typedef struct s_game
 	t_img		player;
 	t_img		floor;
 	t_img		coins;
+	t_img		exit;
 }				t_game;
 
 int				key_handlers(int keycode, t_game *game);
-int				ft_close(t_game *game);
+int ft_close(t_game *game, int code, char *msg);
 void			ft_rendermap(t_game *game);
 void			render_object(t_game *game, t_img img);
 void			ft_identify_object(t_game *game);
@@ -90,5 +94,6 @@ void			ft_free_map(t_game *game);
 void win_game(t_game *game);
 void fill(t_game game, int j, int i, int *coll);
 int	ft_checkpath(t_game game, int j, int i);
+int display_exit(t_game *game);
 
 #endif

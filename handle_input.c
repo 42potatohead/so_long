@@ -1,10 +1,20 @@
 #include "so_long.h"
 
+int display_exit(t_game *game)
+{
+	if (game->data.coinscltd == game->mapdata.coins)
+	{
+		mlx_put_image_to_window(game->data.mlx_ptr, game->data.window, game->exit.xpm_ptr, (game->mapdata.exit_i * 32), (game->mapdata.exit_j * 32));
+		return 1;
+	}
+	return 1;
+}
+
 int	key_handlers(int keycode, t_game *game)
 {
 	if(keycode == XK_Escape)
 	{
-		ft_close(game);
+		ft_close(game, 1, "Game closed successfully");
 	}
 	ft_movement(keycode, game);
 	return (0);
@@ -43,6 +53,7 @@ void ft_free_img(t_game *game)
 	mlx_destroy_image(game->data.mlx_ptr, game->wall.xpm_ptr);
 	mlx_destroy_image(game->data.mlx_ptr, game->floor.xpm_ptr);
 	mlx_destroy_image(game->data.mlx_ptr, game->coins.xpm_ptr);
+	mlx_destroy_image(game->data.mlx_ptr, game->exit.xpm_ptr);
 }
 
 void ft_free_map(t_game *game)
@@ -56,19 +67,20 @@ void ft_free_map(t_game *game)
 	free(game->mapdata.row);
 }
 
-int ft_close(t_game *game)
+int ft_close(t_game *game, int code, char *msg)
 {
+	ft_printf("%s", msg);
 	ft_free_img(game);
 	if (game->mapdata.mapalloc == 1)
 		ft_free_map(game);
 	mlx_destroy_window(game->data.mlx_ptr, game->data.window);
 	mlx_destroy_display(game->data.mlx_ptr);
 	free(game->data.mlx_ptr);
-	exit(0);
+	exit(code);
 }
 
 void win_game(t_game *game)
 {
-	ft_printf("Chicken escaped!! You won the game! \n");
-	ft_close(game);
+	// ft_printf("Chicken escaped!! You won the game! \n");
+	ft_close(game, 1, "Chicken escaped!! You won the game!");
 }
