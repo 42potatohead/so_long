@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:12:49 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/08 19:55:50 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:55:22 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ void ft_initimg(t_game *game)
 
 int ft_initgame(t_game *game, char **av)
 {
+	game->mapdata.initgame = 1;
 	game->data.mlx_ptr = mlx_init();
 	if (!game->data.mlx_ptr)
 		return (1);
-	game->data.window = mlx_new_window(game->data.mlx_ptr, 34 * 32, 6 * 32, "WOW");
+	game->data.window = mlx_new_window(game->data.mlx_ptr, (game->mapdata.width - 1) * 32, game->mapdata.height * 32, "WOW");
 	if(!game->data.window)
 		return (free(game->data.mlx_ptr), 1);
 	game->data.coinscltd = 0;
@@ -67,11 +68,27 @@ int ft_initgame(t_game *game, char **av)
 	ft_map(game, av);
 	return (1);
 }
+
+void	init_map(t_game *game, char **av)
+{
+	int fd;
+
+	fd = open(av[1], O_RDONLY);
+	ft_calch(game, fd);
+	close(fd);
+	game->mapdata.mapalloc = 1;
+    game->mapdata.row = malloc(sizeof(char *) * (game->mapdata.height + 1));
+	if (!game->mapdata.row)
+		return ;
+}
+
 int	main(int ac, char **av)
 {
 	t_game game;
 
+	game.mapdata.initgame = 0;
 	ft_check_av(ac, av);
+	init_map(&game, av);
 	ft_initgame(&game, av);
 	mlx_hook(game.data.window, 17, 0, ft_close, &game);
 	mlx_hook(game.data.window, KeyPress, KeyRelease, key_handlers, &game);

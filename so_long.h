@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/08 19:31:35 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:55:34 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_mapdata
 	int			mapalloc;
 	int			exit_j;
 	int			exit_i;
+	int			initgame;
 }				t_mapdata;
 
 typedef struct s_game
@@ -95,5 +96,7 @@ void win_game(t_game *game);
 void fill(t_game game, int j, int i, int *coll);
 int	ft_checkpath(t_game game, int j, int i);
 int display_exit(t_game *game);
+void	init_map(t_game *game, char **av);
+void ft_calch(t_game *game, int fd);
 
 #endif

@@ -70,12 +70,15 @@ void ft_free_map(t_game *game)
 int ft_close(t_game *game, int code, char *msg)
 {
 	ft_printf("%s", msg);
-	ft_free_img(game);
+	// ft_free_img(game);
 	if (game->mapdata.mapalloc == 1)
 		ft_free_map(game);
-	mlx_destroy_window(game->data.mlx_ptr, game->data.window);
-	mlx_destroy_display(game->data.mlx_ptr);
-	free(game->data.mlx_ptr);
+	if (game->mapdata.initgame == 1)
+	{
+		mlx_destroy_window(game->data.mlx_ptr, game->data.window);
+		mlx_destroy_display(game->data.mlx_ptr);
+		free(game->data.mlx_ptr);
+	}
 	exit(code);
 }
 
