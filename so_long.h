@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/09 17:55:34 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:52:31 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
+# define TILE_SIZE 64
 
 typedef enum e_assets
 {
@@ -33,6 +34,7 @@ typedef enum e_assets
 typedef struct s_img
 {
 	void		*xpm_ptr;
+	int			initimg;
 }				t_img;
 
 typedef struct s_data
@@ -49,8 +51,8 @@ typedef struct s_render
 	int			img_height;
 	int			i;
 	int			j;
-	int			player_i;
-	int			player_j;
+	int			plyr_i;
+	int			plyr_j;
 	char		dir;
 }				t_render;
 
@@ -82,7 +84,7 @@ typedef struct s_game
 }				t_game;
 
 int				key_handlers(int keycode, t_game *game);
-int ft_close(t_game *game, int code, char *msg);
+int				ft_close(t_game *game, int code, char *msg);
 void			ft_rendermap(t_game *game);
 void			render_object(t_game *game, t_img img);
 void			ft_identify_object(t_game *game);
@@ -92,11 +94,11 @@ void			ft_playermove(t_game *game, int i, int j);
 void			ft_movement(int keycode, t_game *game);
 void			ft_checkmap(t_game *game);
 void			ft_free_map(t_game *game);
-void win_game(t_game *game);
-void fill(t_game game, int j, int i, int *coll);
-int	ft_checkpath(t_game game, int j, int i);
-int display_exit(t_game *game);
-void	init_map(t_game *game, char **av);
-void ft_calch(t_game *game, int fd);
+void			win_game(t_game *game);
+void			fill(t_game game, int j, int i, int *coll);
+int				ft_checkpath(t_game game, int j, int i);
+int				display_exit(t_game *game);
+void			init_map(t_game *game, char **av);
+void			ft_calch(t_game *game, int fd);
 
 #endif

@@ -1,5 +1,5 @@
 NAME = so_long
-SRC = so_long.c map.c handle_input.c
+SRC = so_long.c map.c handle_input.c checkpath.c render.c close_game.c
 LIBFT_DIR = ./libft
 GNL_SRC = $(addprefix gnl/, get_next_line.c get_next_line_utils.c)
 PRINTF_SRC = $(addprefix printf/, ft_printf.c ft_print.c ft_numbers.c )
