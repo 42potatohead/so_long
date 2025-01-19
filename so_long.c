@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 19:12:49 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/10 19:31:10 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:46:15 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void	ft_initimg(t_game *game)
 {
 	game->img.initimg = 1;
 	game->wall.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr,
-			"./imgs/border64.xpm", &game->render.img_height,
+			"./imgs/border.xpm", &game->render.img_height,
 			&game->render.img_width);
 	game->floor.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr,
-			"./imgs/Grass2.xpm", &game->render.img_height,
+			"./imgs/grass242.xpm", &game->render.img_height,
 			&game->render.img_width);
 	game->player.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr,
-			"./imgs/chicken-single-64wgrass.xpm", &game->render.img_height,
+			"./imgs/chickenbg.xpm", &game->render.img_height,
 			&game->render.img_width);
 	game->coins.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr,
-			"./imgs/Soju-w-grass.xpm", &game->render.img_height,
+			"./imgs/Soju-can.xpm", &game->render.img_height,
 			&game->render.img_width);
 	game->exit.xpm_ptr = mlx_xpm_file_to_image(game->data.mlx_ptr,
 			"./imgs/exit.xpm", &game->render.img_height,
@@ -67,7 +67,7 @@ int	ft_initgame(t_game *game, char **av)
 	if (!game->data.mlx_ptr)
 		return (1);
 	game->data.window = mlx_new_window(game->data.mlx_ptr, (game->mapdata.width
-				- 1) * TILE_SIZE, game->mapdata.height * TILE_SIZE, "WOW");
+				- 1) * TILE_SIZE, game->mapdata.height * TILE_SIZE, "Chicken");
 	if (!game->data.window)
 		return (free(game->data.mlx_ptr), 1);
 	game->data.coinscltd = 0;

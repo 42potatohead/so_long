@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/10 19:52:31 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:30:02 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
-# define TILE_SIZE 64
+# define TILE_SIZE 42
 
 typedef enum e_assets
 {
@@ -68,6 +68,8 @@ typedef struct s_mapdata
 	int			exit_j;
 	int			exit_i;
 	int			initgame;
+	int			invalid;
+	int			players;
 }				t_mapdata;
 
 typedef struct s_game

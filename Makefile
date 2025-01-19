@@ -9,7 +9,7 @@ GNL_OBJ := $(GNL_SRC:%.c=%.o)
 PRINTF_OBJ := $(PRINTF_SRC:%.c=%.o)
 
 CC = cc
-CCFLAGS = -Wextra -Wall -Werror -lmlx -lX11 -lXext -L./libft -lft
+CCFLAGS = -Wextra -Wall -Werror -lmlx -lX11 -lXext -L./libft -lft -g
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:33:31 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/10 19:58:45 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:44:58 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,25 @@ int	ft_readmap(t_game *game, int fd)
 	return (1);
 }
 
+void is_valid_ch(t_game *game, char ch)
+{
+
+	if (ch != 'C' && ch != '1' && ch != 'P' && ch != 'E' && ch != '0' && ch != '\n')
+		game->mapdata.invalid++;
+	if (ch == COINS)
+		game->mapdata.coins++;
+	if (ch == 'E')
+		game->mapdata.exits++;
+	if (ch == 'P')
+		game->mapdata.players++;
+}
+
 void	parsemap(t_game *game, int fd)
 {
 	char	*line;
 	int		ch;
-
+	game->mapdata.invalid = 0;
+	game->mapdata.players = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -44,15 +58,15 @@ void	parsemap(t_game *game, int fd)
 		ch = 0;
 		while (line[ch] != '\0')
 		{
-			if (line[ch] == COINS)
-				game->mapdata.coins++;
-			if (line[ch] == 'E')
-				game->mapdata.exits++;
+			is_valid_ch(game, line[ch]);
 			ch++;
 		}
 		free(line);
 		game->mapdata.height++;
 	}
+	if (game->mapdata.invalid != 0)
+		ft_close(game, 1, "invalid character in map");
+
 }
 
 void	ft_calch(t_game *game, int fd)
@@ -64,6 +78,9 @@ void	ft_calch(t_game *game, int fd)
 	parsemap(game, fd);
 	if (game->mapdata.exits != 1)
 		ft_close(game, 1, "Wrong number of exits, Must be one");
+	printf("%d\n", game->mapdata.players);
+	if(game->mapdata.players != 0)
+		ft_close(game, 1, "Invalid Number of Players");
 }
 
 void	ft_checkmap(t_game *game)

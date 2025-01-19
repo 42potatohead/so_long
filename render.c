@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:50:27 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/10 20:51:35 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:02:49 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_trailing(t_game *game, int i, int j)
 			game->floor.xpm_ptr, ((i - 1) * TILE_SIZE), (j * TILE_SIZE));
 }
 
-void	ft_playermove(t_game *game, int i, int j)
+void	ft_playermove(t_game *game, int i, int j, int keycode)
 {
 	game->render.plyr_i = i;
 	game->render.plyr_j = j;
