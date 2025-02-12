@@ -6,11 +6,17 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 16:59:46 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/09/11 19:16:51 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:41:06 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_c(char args, int *len)
+{
+	printf_ft_putchar(args);
+	(*len)++;
+}
 
 void	ft_hex(size_t num, int *len, char x)
 {

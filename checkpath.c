@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:48:39 by zabu-bak          #+#    #+#             */
-/*   Updated: 2025/01/19 12:40:02 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:59:02 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	fill(t_game game, int j, int i, int *coll)
 {
-	if (j == 0 || i == 0 || j == game.mapdata.height || i == 33
+	if (j == 0 || i == 0 || j == game.mapdata.height || i == game.mapdata.width
 		|| game.mapdata.tmp_map[j][i] == '1'
 		|| game.mapdata.tmp_map[j][i] == 'F')
 		return ;
-	if (game.mapdata.tmp_map[j][i] == COINS)
+	if (game.mapdata.tmp_map[j][i] == coins)
 		*(coll) += 1;
 	if (game.mapdata.tmp_map[j][i] == 'E')
 		*(coll) += 1;

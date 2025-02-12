@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:59:22 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/12/10 21:03:14 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:58:27 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ void	ft_movement(int keycode, t_game *game)
 
 	i = game->render.plyr_i;
 	j = game->render.plyr_j;
-	if (keycode == XK_w && game->mapdata.row[j - 1][i] != WALL)
+	if (keycode == XK_w && game->mapdata.row[j - 1][i] != wall)
 	{
 		game->render.dir = 'w';
 		ft_playermove(game, game->render.plyr_i, game->render.plyr_j - 1);
 	}
-	if (keycode == XK_s && game->mapdata.row[j + 1][i] != WALL)
+	if (keycode == XK_s && game->mapdata.row[j + 1][i] != wall)
 	{
 		game->render.dir = 's';
 		ft_playermove(game, game->render.plyr_i, game->render.plyr_j + 1);
 	}
-	if (keycode == XK_a && game->mapdata.row[j][i - 1] != WALL)
+	if (keycode == XK_a && game->mapdata.row[j][i - 1] != wall)
 	{
 		game->render.dir = 'a';
 		ft_playermove(game, game->render.plyr_i - 1, game->render.plyr_j);
 	}
-	if (keycode == XK_d && game->mapdata.row[j][i + 1] != WALL)
+	if (keycode == XK_d && game->mapdata.row[j][i + 1] != wall)
 	{
 		game->render.dir = 'd';
 		ft_playermove(game, game->render.plyr_i + 1, game->render.plyr_j);

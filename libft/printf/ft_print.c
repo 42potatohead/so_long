@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 22:20:16 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/11/29 15:48:13 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:41:25 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,4 @@ void	ft_string(char *args, int *len)
 		i++;
 		(*len)++;
 	}
-}
-
-void	ft_c(char args, int *len)
-{
-	printf_ft_putchar(args);
-	(*len)++;
 }

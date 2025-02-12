@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:17:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/11/29 17:12:54 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:43:17 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*gnl_substr(char *str, size_t start, int size)
 	int		i;
 
 	if (size == 0)
-		return(NULL);
+		return (NULL);
 	if (str == NULL)
 		return (NULL);
 	if (start > gnl_strlen(str))
@@ -71,11 +71,7 @@ char	*gnl_substr(char *str, size_t start, int size)
 		size = len;
 	new_str = malloc((size + 1) * sizeof(char));
 	if (!new_str)
-	{
-		new_str = NULL;
-		free(new_str);
-		return (NULL);
-	}
+		return (new_str = NULL, free(new_str), NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -95,11 +91,7 @@ char	*gnl_strjoin(const char *s1, const char *s2)
 
 	res = (char *)malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
 	if (!res)
-	{
-		res = NULL;
-		free(res);
-		return (NULL);
-	}
+		return (res = NULL, free(res), NULL);
 	i = 0;
 	j = 0;
 	while (s1[i])

@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 19:50:27 by zabu-bak          #+#    #+#             */
-/*   Updated: 2025/01/19 13:02:49 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:00:24 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	ft_trailing(t_game *game, int i, int j)
 			game->floor.xpm_ptr, ((i - 1) * TILE_SIZE), (j * TILE_SIZE));
 }
 
-void	ft_playermove(t_game *game, int i, int j, int keycode)
+void	ft_playermove(t_game *game, int i, int j)
 {
 	game->render.plyr_i = i;
 	game->render.plyr_j = j;
-	if (game->mapdata.row[game->render.plyr_j][game->render.plyr_i] == COINS)
+	if (game->mapdata.row[game->render.plyr_j][game->render.plyr_i] == coins)
 	{
-		game->mapdata.row[game->render.plyr_j][game->render.plyr_i] = FLOOR;
+		game->mapdata.row[game->render.plyr_j][game->render.plyr_i] = floor;
 		game->data.coinscltd++;
-		ft_printf("Coins Collected : %d / %d \n",
+		ft_printf("Soju's Drank : %d / %d \n",
 			game->data.coinscltd, game->mapdata.coins);
 	}
 	if (game->mapdata.row[game->render.plyr_j][game->render.plyr_i] == 'E'
@@ -87,13 +87,13 @@ void	ft_identify_object(t_game *game)
 		game->mapdata.exit_i = game->render.i;
 		render_object(game, game->floor);
 	}
-	if (game->mapdata.row[game->render.j][game->render.i] == WALL)
+	if (game->mapdata.row[game->render.j][game->render.i] == wall)
 		render_object(game, game->wall);
-	if (game->mapdata.row[game->render.j][game->render.i] == FLOOR)
+	if (game->mapdata.row[game->render.j][game->render.i] == floor)
 		render_object(game, game->floor);
-	if (game->mapdata.row[game->render.j][game->render.i] == COINS)
+	if (game->mapdata.row[game->render.j][game->render.i] == coins)
 		render_object(game, game->coins);
-	if (game->mapdata.row[game->render.j][game->render.i] == PLAYER)
+	if (game->mapdata.row[game->render.j][game->render.i] == player)
 	{
 		game->render.plyr_i = game->render.i;
 		game->render.plyr_j = game->render.j;

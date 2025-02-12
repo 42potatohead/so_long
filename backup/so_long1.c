@@ -61,7 +61,7 @@ void ft_rendermap(t_game *game)
 		x = 0;
 		while (i < len)
 		{
-			if (game->mapdata.row[j][i] == WALL)
+			if (game->mapdata.row[j][i] == wall)
 				mlx_put_image_to_window(game->data.mlx_ptr, game->data.window,
 					game->wall.xpm_ptr, (i * 48.5), (j * 48.5));
 			i++;

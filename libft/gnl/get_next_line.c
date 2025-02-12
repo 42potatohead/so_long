@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:17:28 by zabu-bak          #+#    #+#             */
-/*   Updated: 2024/11/29 17:12:54 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:44:52 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	free_fd(char *string)
 {
-	if(string)
+	if (string)
 	{
 		free(string);
 		string = NULL;
@@ -26,16 +26,11 @@ static char	*readline(int fd, char *buf, char **string)
 {
 	int		i;
 	char	*tmp;
-	// static int x;
 
-	// x++;
 	i = 1;
 	while (i > 0)
 	{
-		// if (x == 2)
-		// 	i = -1;
-		// else
-			i = read(fd, buf, BUFFER_SIZE);
+		i = read(fd, buf, BUFFER_SIZE);
 		if (i == -1)
 			return (free (buf), NULL);
 		if (i == 0)
@@ -82,18 +77,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buff = NULL;
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	// printf("before buff check %s \n", buff);
 	if (buff == NULL)
-	{
-		free_fd(string);
-		return (NULL);
-	}
-	// printf("after buff check %s \n", buff);
+		return (free_fd(string), NULL);
 	buff[0] = '\0';
 	line = NULL;
 	if (!readline(fd, buff, &string) || !string)
 		return (string = NULL, NULL);
-	// printf("test: %s \n", string);
 	line = extract(string);
 	temp = string;
 	if (line)

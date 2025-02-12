@@ -6,7 +6,7 @@
 /*   By: zabu-bak <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 19:55:24 by zabu-bak          #+#    #+#             */
-/*   Updated: 2025/01/19 12:30:02 by zabu-bak         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:59:13 by zabu-bak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "./X11/X.h"
 # include "./X11/keysym.h"
 # include "./libft/libft.h"
-# include "./printf/ft_printf.h"
-# include "gnl/get_next_line.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdlib.h>
@@ -25,10 +23,10 @@
 
 typedef enum e_assets
 {
-	WALL = '1',
-	FLOOR = '0',
-	COINS = 'C',
-	PLAYER = 'P'
+	wall = '1',
+	floor = '0',
+	coins = 'C',
+	player = 'P'
 }				t_assets;
 
 typedef struct s_img
@@ -102,5 +100,7 @@ int				ft_checkpath(t_game game, int j, int i);
 int				display_exit(t_game *game);
 void			init_map(t_game *game, char **av);
 void			ft_calch(t_game *game, int fd);
+void			parsemap(t_game *game, int fd);
+void			is_valid_ch(t_game *game, char ch);
 
 #endif
